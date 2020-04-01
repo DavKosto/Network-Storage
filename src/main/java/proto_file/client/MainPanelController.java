@@ -85,17 +85,16 @@ public class MainPanelController implements Initializable {
         clientHandler.setRegistrationListener(this::setAuthorization);
     }
 
-    private void setAuthorization(boolean isRegs){
+    private void setAuthorization(boolean isRegs) {
         if (isRegs) {
+            setAuthorized(true);
             Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Поздравляем, Вы успешно зарегистреровались. " +
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Вы успешно зарегистреровались. " +
                         "\nМожете авторизаваться.",
                         ButtonType.OK);
                 alert.showAndWait();
             });
-            setAuthorized(true);
-        }else {
-            setAuthorized(false);
+        } else {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Пользователь с таким логином уже существует",
                         ButtonType.OK);
@@ -110,12 +109,12 @@ public class MainPanelController implements Initializable {
         clientHandler.setAuthenticationListener(this::establishUserConnection);
     }
 
-    private void establishUserConnection(boolean isAuth){
+    private void establishUserConnection(boolean isAuth) {
         if (isAuth) {
             serverController.updateList("getRoot");
             clientController.updateList(ClientCommandService.PATH_FILE_DIRECTORY);
             setCommunication(true);
-        }else {
+        } else {
             setCommunication(false);
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Не правильно ввели логин и/или пароль",
@@ -128,17 +127,23 @@ public class MainPanelController implements Initializable {
 
     public void tryToRegs(ActionEvent actionEvent) {
         if (isOpen()) {
-            connect();
-        }
-        String login = loginFieldRegs.getText();
-        String password = passwordFieldRegs.getText();
-        if (!login.equals("") && !password.equals("")) {
-            loginFieldRegs.clear();
-            passwordFieldRegs.clear();
-            authenticationService.registration(login, password);
-        }else {
+            String login = loginFieldRegs.getText();
+            String password = passwordFieldRegs.getText();
+            if (!login.equals("") && !password.equals("")) {
+                loginFieldRegs.clear();
+                passwordFieldRegs.clear();
+                authenticationService.registration(login, password);
+            } else {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Не заполнены все поля для регистрации!",
+                            ButtonType.OK);
+                    alert.showAndWait();
+                });
+            }
+        } else {
             Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Не заполнены все поля для регистрации!",
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Разорвано соедение с сервером.\n" +
+                        "Перезапустите приложение",
                         ButtonType.OK);
                 alert.showAndWait();
             });
@@ -146,39 +151,41 @@ public class MainPanelController implements Initializable {
     }
 
     public void tryToAuth() {
-        String login = loginFieldAuth.getText();
-        String password = passwordFieldAuth.getText();
-        if (!login.equals("") && !password.equals("")) {
-            loginFieldAuth.clear();
-            passwordFieldAuth.clear();
-            authenticationService.login(login, password);
-            authenticationService.successLogin(login, password);
-        }else {
+        if (isOpen()) {
+            String login = loginFieldAuth.getText();
+            String password = passwordFieldAuth.getText();
+            if (!login.equals("") && !password.equals("")) {
+                loginFieldAuth.clear();
+                passwordFieldAuth.clear();
+                authenticationService.login(login, password);
+                authenticationService.successLogin(login, password);
+            } else {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Не заполнены все поля для авторизации!",
+                            ButtonType.OK);
+                    alert.showAndWait();
+                });
+            }
+        } else {
             Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Не заполнены все поля для авторизации!",
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Разорвано соедение с сервером.\n" +
+                        "Перезапустите приложение",
                         ButtonType.OK);
                 alert.showAndWait();
             });
         }
     }
 
-    public void setAuthorizedPanel(ActionEvent actionEvent){
+    public void setAuthorizedPanel(ActionEvent actionEvent) {
         if (isOpen()) {
-            connect();
+            setAuthorized(true);
         }
-        setAuthorized(true);
     }
 
-    public void setRegistrationPanel(ActionEvent actionEvent){
+    public void setRegistrationPanel(ActionEvent actionEvent) {
         if (isOpen()) {
-            connect();
+            setAuthorized(false);
         }
-        setAuthorized(false);
-    }
-
-
-    private void connect() {
-        setAuthorized(false);
     }
 
     public void sendBtnAction(ActionEvent actionEvent) {
@@ -238,18 +245,8 @@ public class MainPanelController implements Initializable {
     }
 
     public void btnExitAction() {
-        if (isOpen()) {
-            ProtoClient.getInstance().stop();
-        }
         setAuthorized(false);
     }
-
-//    public void btnExitAction() {
-//        if (isOpen()) {
-//            ProtoClient.getInstance().stop();
-//        }
-//        Platform.exit();
-//    }
 
     private boolean isOpen() {
         return ProtoClient.getInstance().getCurrentChannel().isOpen();
