@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" xmlns:fx="http://javafx.com/fxml" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"
+          fx:controller="proto_file.client.MainPanelController" GridPane.hgrow="SOMETIMES"
+          GridPane.vgrow="SOMETIMES">
+
+    <GridPane fx:id="registrationPanel" alignment="center" hgap="10" prefHeight="530.0" prefWidth="582.0" vgap="10">
+        <padding>
+            <Insets bottom="40" left="40" right="40" top="40" />
+        </padding>
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" maxWidth="Infinity" minWidth="100.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="200.0" prefWidth="200.0" />
+        </columnConstraints>
+        <Label alignment="TOP_RIGHT" cache="true" prefHeight="66.0" prefWidth="172.0" text="Registration"
+               textAlignment="RIGHT" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="1">
+            <font>
+                <Font name="Arial" size="24" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="20" left="0" right="0" top="20" />
+            </GridPane.margin>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Label>
+        <Label text="Login :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="loginFieldRegs" maxWidth="200.0" prefHeight="34.0" prefWidth="300.0" promptText="login"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Password : " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <PasswordField fx:id="passwordFieldRegs" maxHeight="67.0" maxWidth="200.0" onAction="#tryToRegs"
+                       prefWidth="300.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Button defaultButton="true" onAction="#tryToRegs" prefHeight="28.0" prefWidth="90.0" text="Sign up"
+                GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.rowSpan="1">
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+        </Button>
+        <Button onAction="#setAuthorizedPanel" prefHeight="28.0" prefWidth="90.0" text="Sign in"
+                GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <rowConstraints>
+            <RowConstraints minHeight="100.0" />
+            <RowConstraints />
+            <RowConstraints minHeight="30.0" />
+            <RowConstraints minHeight="30.0" />
+            <RowConstraints />
+            <RowConstraints minHeight="40.0" />
+            <RowConstraints minHeight="40.0" />
+        </rowConstraints>
+    </GridPane>
+
+
+    <GridPane fx:id="authorizationPanel" alignment="center" hgap="10" prefHeight="530.0" prefWidth="582.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+        <padding>
+            <Insets bottom="40" left="40" right="40" top="40" />
+        </padding>
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" maxWidth="Infinity" minWidth="100.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="200.0" prefWidth="200.0" />
+        </columnConstraints>
+        <Label alignment="TOP_RIGHT" cache="true" prefHeight="66.0" prefWidth="512.0" text="Authentication" textAlignment="RIGHT" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="1">
+            <font>
+                <Font name="Arial" size="24" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="20.0" right="5.0" top="20.0" />
+            </GridPane.margin>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <padding>
+                <Insets right="150.0" />
+            </padding>
+        </Label>
+        <Label text="Login :" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets right="325.0" />
+            </GridPane.margin></Label>
+        <TextField fx:id="loginFieldAuth" maxWidth="200.0" prefHeight="34.0" prefWidth="200.0" promptText="login" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets left="75.0" />
+            </GridPane.margin></TextField>
+        <Label text="Password : " GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets right="320.0" />
+            </GridPane.margin></Label>
+        <PasswordField fx:id="passwordFieldAuth" maxHeight="67.0" maxWidth="200.0" onAction="#tryToAuth" prefWidth="300.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets left="75.0" />
+            </GridPane.margin></PasswordField>
+        <Button defaultButton="true" onAction="#tryToRegs" prefHeight="28.0" prefWidth="90.0" text="Enter" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.rowSpan="1">
+            <GridPane.margin>
+                <Insets right="40.0" />
+            </GridPane.margin>
+        </Button>
+        <Button onAction="#setRegistrationPanel" prefHeight="28.0" prefWidth="90.0" text="Sign up" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+            <GridPane.margin>
+                <Insets right="40.0" />
+            </GridPane.margin></Button>
+        <rowConstraints>
+            <RowConstraints minHeight="100.0" />
+            <RowConstraints />
+            <RowConstraints minHeight="30.0" />
+            <RowConstraints minHeight="30.0" />
+            <RowConstraints />
+            <RowConstraints minHeight="40.0" />
+            <RowConstraints minHeight="40.0" />
+        </rowConstraints>
+    </GridPane>
+
+
+<!--    <GridPane fx:id="authorizationPanel" alignment="center" hgap="10" prefHeight="530.0" prefWidth="582.0" vgap="10">-->
+<!--        <padding>-->
+<!--            <Insets bottom="40" left="40" right="40" top="40" />-->
+<!--        </padding>-->
+<!--        <columnConstraints>-->
+<!--            <ColumnConstraints halignment="RIGHT" maxWidth="Infinity" minWidth="100.0" prefWidth="100.0" />-->
+<!--            <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="200.0" prefWidth="200.0" />-->
+<!--        </columnConstraints>-->
+<!--        <Label alignment="TOP_RIGHT" cache="true" prefHeight="66.0" prefWidth="172.0" text="Authentication" textAlignment="RIGHT" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="1">-->
+<!--            <font>-->
+<!--                <Font name="Arial" size="24" />-->
+<!--            </font>-->
+<!--            <GridPane.margin>-->
+<!--                <Insets bottom="20" left="0" right="0" top="20" />-->
+<!--            </GridPane.margin>-->
+<!--            <opaqueInsets>-->
+<!--                <Insets />-->
+<!--            </opaqueInsets>-->
+<!--        </Label>-->
+<!--        <Label text="Login :" GridPane.columnIndex="0" GridPane.rowIndex="2" />-->
+<!--        <TextField fx:id="loginFieldAuth" maxWidth="300.0" prefHeight="34.0" prefWidth="200.0" promptText="login" GridPane.columnIndex="1" GridPane.rowIndex="2" />-->
+<!--        <Label text="Password : " GridPane.columnIndex="0" GridPane.rowIndex="3" />-->
+<!--        <PasswordField fx:id="passwordFieldAuth" onAction="#tryToAuth" maxHeight="67.0" maxWidth="300.0" prefWidth="300.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />-->
+<!--        <Button defaultButton="true" onAction="#tryToAuth" prefHeight="28.0" prefWidth="90.0" text="Enter" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.rowSpan="1">-->
+<!--            <GridPane.margin>-->
+<!--                <Insets />-->
+<!--            </GridPane.margin>-->
+<!--        </Button>-->
+<!--        <Button onAction="#setRegistrationPanel" text="Sign up" prefHeight="28.0" prefWidth="90.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />-->
+<!--        <rowConstraints>-->
+<!--            <RowConstraints minHeight="100.0" />-->
+<!--            <RowConstraints />-->
+<!--            <RowConstraints minHeight="30.0" />-->
+<!--            <RowConstraints minHeight="30.0" />-->
+<!--            <RowConstraints />-->
+<!--            <RowConstraints minHeight="40.0" />-->
+<!--            <RowConstraints minHeight="40.0" />-->
+<!--        </rowConstraints>-->
+<!--    </GridPane>-->
+
+
+    <HBox fx:id="panelStorage" visible="false" alignment="center" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"
+          prefHeight="800.0" prefWidth="1200.0">
+        <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <HBox>
+                <MenuBar>
+                    <Menu text="Menu">
+                        <MenuItem text="Exit" onAction="#btnExitAction"/>
+                    </Menu>
+                </MenuBar>
+            </HBox>
+            <HBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                <fx:include fx:id="clientPanel" source="clientPanel.fxml"/>
+                <fx:include fx:id="serverPanel" source="serverPanel.fxml"/>
+            </HBox>
+            <HBox spacing="5">
+                <Button maxWidth="Infinity" focusTraversable="false" text="Send" HBox.hgrow="ALWAYS"
+                        onAction="#sendBtnAction"/>
+                <Button maxWidth="Infinity" focusTraversable="false" text="Delete" HBox.hgrow="ALWAYS"
+                        onAction="#deleteFile"/>
+                <Button maxWidth="Infinity" focusTraversable="false" text="Download" HBox.hgrow="ALWAYS"
+                        onAction="#downloadBtnAction"/>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </padding>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <padding>
+        <Insets top="50" right="50" bottom="20" left="50"/>
+    </padding>
+
+</GridPane>
